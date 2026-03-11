@@ -1,17 +1,7 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
+#from django.shortcuts import render
+from django.http import HttpResponse
 
-logger = logging.getLogger(_name_)
-
-@api_view(['GET'])
-def hello_api(request):
-  user_str = request.query_params.get('name', 'World')
-
-data = {
-  "message": f"hello, {user_str}"
-}
-
-logger.info(f"Hello API accessed with name: {user_str}")
-
-return Response(data)
+# Create your views here.
+def index(request):
+    #my_name = request.GET.get('name', "CGU")
+    return HttpResponse("Hello Zoe"))
