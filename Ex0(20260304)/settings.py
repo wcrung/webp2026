@@ -3,6 +3,18 @@ INSTALLED_APPS = [
   'myapp',
 ]
 
+import logging
+
+logger = logging.getLogger(_name_)
+
+def my_function():
+    logger.debug('Something happened!')
+    logger.info('Function is running.')
+    logger.warning('Something may be wrong.')
+    logger.error('Something went wrong')
+    logger.critical('Serious problem!')
+    logger.exception('Division failed!')
+  
 LOGGING = {
   'version': 1,
   'disable_existing_loggers': False,
