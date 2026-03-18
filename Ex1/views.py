@@ -8,7 +8,8 @@ class HelloApiView(APIView):
         my_name = request.GET.get('name', None)
         if my_name:
             retValue = {}
-            retValue['data'] = "Hello" + my_namereturn Response(retValue, status=status.HTTP_200_OK)
+            retValue['data'] = "Hello" + my_name
+            return Response(retValue, status=status.HTTP_200_OK)
         else:
             return Response(
                 {"res": "parameter: name is None"},
