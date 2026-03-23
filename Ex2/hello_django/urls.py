@@ -1,9 +1,7 @@
 from django.contrib import admin
-from django.urls import path
-from myhello.views import helloApiView
+from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-
-    path('myhello/', HelloApiView.as_views()),
+    path('api/', include('myhello.urls')),
 ]
