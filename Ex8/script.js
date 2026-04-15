@@ -16,12 +16,12 @@ xhr.onreadystatechange = function () {
 function addNewData() {
 
   if (!dataset.length) {
-    alert("資料還沒載入！");
+    alert("無資料！");
     return;
   }
 
   if (currentIndex >= dataset.length) {
-    alert("沒有更多資料！");
+    alert("無資料！");
     return;
   }
 
