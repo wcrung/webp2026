@@ -1,28 +1,28 @@
-function getImages(){
-  const url="https://api.flickr.com/services/rest?method=flickr.photos.getRecent&api_key=ca370d51a054836007519a00ff4ce59e&per_page=9&format=json&nojsoncallback=1";
-  
-  fetch(url)
-  .then(response => response.blob())
-  .then(blob => blob.text())
-  .then(text => JSON.parse(text))
-  .then(data => {
-    console.log(data);
+var dataURL = "https://api.flickr.com/services/rest?method=flickr.photos.getRecent&api_key=ca370d51a054836007519a00ff4ce59e&per_page=9&format=json&nojsoncallback=1";
 
-    const gallery = document.getElementById("gallery");
-    gallery.innerHTML = "";
-    
-    const photos = data.photos.photo;
+function getimg(){
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', dataURL, true);
+  xhr.send();
 
-    photos.forEach(photo => {
-      const img = document.createElement("img");
-      
-      const imgUrl = `https://live.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_w.jpg`;
-      
-      img.src = imgUrl;
-      gallery.appendChild(img);
-    });
-  })
-  .catch(error => {
-    console.log("Error:", error);
+  xhr.onload = function(){
+    var data = JSON.parse(this.responseText);
+    add_new_img(data.photos.photo);
+  }
+}
+
+function add_new_img(dataset){
+  var gal = document.getElementById("gallery");
+  gal.innerHTML = "";
+
+  dataset.forEach(function(item){
+    console.log(item);
+
+    var img = document.createElement("img");
+
+    var imgUrl = `https://live.staticflickr.com/${item.server}/${item.id}_${item.secret}_w.jpg`;
+
+    img.setAttribute("src", imgUrl);
+    gal.appendChild(img);
   });
 }
