@@ -18,6 +18,83 @@ thead {
 <h1>景點觀光展覽資訊</h1>
 <input type="text" id="searchInput" class="form-control mb-3" placeholder="輸入名稱搜尋" onchange="searchData()">
 <table id="tourist" class="table table-striped table-hover">
+  <script>
+    var openUrl = "https://cloud.culture.tw/frontsite/trans/SearchShowAction.do?method=doFindTypeJ&category=6";
+
+var dataset = [];
+var filteredData = [];
+
+var currentPage = 1;
+var pageSize = 10;
+
+var xhr = new XMLHttpRequest();
+xhr.open('GET', openUrl, true);
+xhr.send();
+
+xhr.onreadystatechange = function () {
+  if (this.readyState == 4 && this.status == 200) {
+    dataset = JSON.parse(this.responseText);
+    filteredData = dataset;  // 預設全部資料
+    renderTable();
+  }
+};
+
+function renderTable() {
+  var table = document.getElementById("tourist").getElementsByTagName("tbody")[0];
+  table.innerHTML = "";
+
+  var start = (currentPage - 1) * pageSize;
+  var end = start + pageSize;
+  var pageData = filteredData.slice(start, end);
+
+  pageData.forEach(data => {
+    var row = table.insertRow();
+
+    row.insertCell(0).textContent = data['title'];
+
+    if (data['showInfo'] && data['showInfo'].length > 0) {
+      row.insertCell(1).textContent = data['showInfo'][0]['location'];
+      row.insertCell(2).textContent = data['showInfo'][0]['price'];
+    } else {
+      row.insertCell(1).textContent = "無資料";
+      row.insertCell(2).textContent = "無資料";
+    }
+  });
+
+  updatePageInfo();
+}
+
+function updatePageInfo() {
+  var totalPages = Math.ceil(filteredData.length / pageSize);
+  document.getElementById("pageInfo").textContent =
+    "第 " + currentPage + " 頁 / 共 " + totalPages + " 頁";
+}
+
+function nextPage() {
+  var totalPages = Math.ceil(filteredData.length / pageSize);
+  if (currentPage < totalPages) {
+    currentPage++;
+    renderTable();
+  }
+}
+
+function prevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    renderTable();
+  }
+}
+
+function searchData() {
+  var keyword = document.getElementById("searchInput").value.toLowerCase();
+
+  filteredData = dataset.filter(data =>
+    data.title && data.title.toLowerCase().includes(keyword)
+  );
+  currentPage = 1;
+  renderTable();
+}
+  </script>
     <thead>
         <tr>
             <th>名稱</th>
