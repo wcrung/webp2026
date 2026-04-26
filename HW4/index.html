@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<title>Ajax Table</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+h1 {
+    margin: 20px 0;
+}
+thead {
+    background-color: #1fa67a;
+    color: white;
+}
+</style>
+</head>
+<body class="container">
+<h1>景點觀光展覽資訊</h1>
+<input type="text" id="searchInput" class="form-control mb-3" placeholder="輸入名稱搜尋" onchange="searchData()">
+<table id="tourist" class="table table-striped table-hover">
+    <thead>
+        <tr>
+            <th>名稱</th>
+            <th>地點</th>
+            <th>票價</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<div class="pagination-area">
+    <button onclick="prevPage()">上一頁</button>
+    <span id="pageInfo">1 / 111 頁</span>
+    <button onclick="nextPage()">下一頁</button>
+</div>
+</body>
+</html>
