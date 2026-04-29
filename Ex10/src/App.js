@@ -12,8 +12,7 @@ const changeText=(event)=>{
 function App(){
   return (
     <div className="App">
-      <h1 style={styleArgument} onClick={ChangeText}>
-        Hello CGU!
+      <h1 style={styleArgument} onClick={ChangeText}> Hello CGU!
       </h1>
     </div>
   );
