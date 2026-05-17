@@ -1,16 +1,13 @@
-import logo from './logo.svg';
 import './App.css';
-import CGU_Login from './cgu_login';
-import HelloCGU from './cgu_hello';
+import DataTable from './DataTable';
 
 function App(){
-  return(
-    <div className="App">
-      </div>
-       {CGU_Login()}
-      </div>
-    </div>
-  );
+    return(
+        <div className="App">
+            <h1>HW5 React DataGrid</h1>
+            <DataTable />
+        </div>
+    );
 }
 
 export default App;
